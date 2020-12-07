@@ -7,7 +7,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<ItemViewHolder>{
+import java.util.List;
+
+public class RecyclerAdapter extends RecyclerView.Adapter<ItemViewHolder> {
+
+    private List<Product> products;
 
     @NonNull
     @Override
@@ -18,11 +22,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ItemViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+        holder.displayProduct(products.get(position));
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        if(products == null){
+            return 0;
+        }
+        return products.size();
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

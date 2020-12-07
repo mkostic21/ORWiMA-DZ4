@@ -2,7 +2,8 @@
     <string name="app_name">ORWiMADZ4</string>
     <string name="btn_search">Search</string>
     <string name="query_hint">Enter brand name</string>
-    <string name="product_name">Name:</string>
-    <string name="product_price">Price:</string>
-    <string name="product_rating">Rating:</string>
+    <string name="product_name">Name: %1$s</string>
+    <string name="product_price">Price: %1$s</string>
+    <string name="product_rating">Rating: %1$s</string>
+    <string name="tv_empty_result">No results found</string>
 </resources>
