@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerAdapter adapter;
     private TextView tvEmpty;
+    private ProgressBar loading;
 
     private Call<List<Product>> apiCall;
 
@@ -40,10 +43,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupApiCall(String brand) {
         apiCall = NetworkUtils.getApiInterface().getProducts(brand);
+
+        recyclerView.setVisibility(View.GONE);
+        tvEmpty.setVisibility(View.GONE);
+        loading.setVisibility(View.VISIBLE);
+
         apiCall.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if (response.isSuccessful()) {
+                    loading.setVisibility(View.GONE);
+
                     if (response.body().isEmpty()) {
                         recyclerView.setVisibility(View.GONE);
                         tvEmpty.setVisibility(View.VISIBLE);
@@ -61,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
+                loading.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 tvEmpty.setVisibility(View.VISIBLE);
             }
@@ -87,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         btnSearch = findViewById(R.id.btnSearch);
         edQuery = findViewById(R.id.edQuery);
         tvEmpty = findViewById(R.id.tvEmpty);
+        loading = findViewById(R.id.loading);
     }
 
     private void setupSearchButtonListener() {

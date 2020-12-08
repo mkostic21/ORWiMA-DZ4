@@ -33,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="@dimen/recycler_horizontal_margin"/>
+
     <TextView
         android:id="@+id/tvEmpty"
         android:layout_width="match_parent"
@@ -40,5 +41,13 @@
         android:visibility="gone"
         android:gravity="center"
         android:text="@string/tv_empty_result"/>
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
 </LinearLayout>
